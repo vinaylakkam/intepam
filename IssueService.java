@@ -9,13 +9,13 @@ public class IssueService {
 
 	public Issue update(Issue issue) throws InvalidIssueStatusException {
 
-		// TODO: Validate the issue.status first;
+		//Validate the issue.status first;
 		// Status can be updated from CREATED to IN_PROGRESS to COMPLETED.
 		if(!isValidStatus(issue)){
 			throw new InvalidIssueStatusException("Issue status is invalid!");
 		}
 		
-		// TODO: Save the issue using issueRepository
+		//Save the issue using issueRepository
 		return issueRepository.updateIssue(issue);
 	}
 	
