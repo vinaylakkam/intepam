@@ -9,13 +9,13 @@ public class IssueService {
 
 	public Issue update(Issue issue) throws InvalidIssueStatusException {
 
-		//Validate the issue.status first;
+		// TODO: Validate the issue.status first;
 		// Status can be updated from CREATED to IN_PROGRESS to COMPLETED.
 		if(!isValidStatus(issue)){
 			throw new InvalidIssueStatusException("Issue status is invalid!");
 		}
 		
-		//Save the issue using issueRepository
+		// TODO: Save the issue using issueRepository
 		return issueRepository.updateIssue(issue);
 	}
 	
@@ -30,7 +30,7 @@ public class IssueService {
 			if (issue == null
 					|| issue.getStatus() == null
 					|| (IssueStatus.valueOf(issue.getStatus().toUpperCase())
-							- IssueStatus.valueOf(issueRepository.getCurrentStatus(issue).toUpperCase()) < 0)) {
+							- IssueStatus.valueOf(getRepoIssueStatus(issue).toUpperCase()) < 0)) {
 				return false;
 
 			}
@@ -38,6 +38,18 @@ public class IssueService {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Returns the current status of the issue in repo
+	 * @return
+	 */
+	private String getRepoIssueStatus(Issue issue) {
+		Issue actualIssue = issueRepository.getIssue(issue.getIssueId());
+		if (actualIssue != null) {
+			return actualIssue.getStatus();
+		}
+		return "";
 	}
 
 	/**
