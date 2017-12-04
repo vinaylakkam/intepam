@@ -24,9 +24,9 @@ public class IssueServiceTest {
 		Issue issueUpdate = new Issue();
 		issueUpdate.setIssueId(123);
 		issueUpdate.setStatus("IN_PROGRESS");
-		when(issueRepository.getIssue(issueUpdate)).thenReturn(repoIssue);
+		Mockito.when(issueRepository.getIssue(issueUpdate)).thenReturn(repoIssue);
 		repoIssue.setStatus("IN_PROGRESS");
-		when(issueRepository.update(issueUpdate)).thenReturn(repoIssue);
+		Mockito.when(issueRepository.update(issueUpdate)).thenReturn(repoIssue);
 		Assert.assertSame(issueService.update(issueUpdate), repoIssue);
 	}
 
@@ -38,7 +38,7 @@ public class IssueServiceTest {
 		Issue issueUpdate = new Issue();
 		issueUpdate.setIssueId(123);
 		issueUpdate.setStatus("IN_PROGRESS");
-		when(issueRepository.getIssue(issueUpdate)).thenReturn(repoIssue);
+		Mockito.when(issueRepository.getIssue(issueUpdate)).thenReturn(repoIssue);
 		issueService.update(issueUpdate);
 	}
 
