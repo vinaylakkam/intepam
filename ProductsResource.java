@@ -1,5 +1,6 @@
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -15,11 +16,19 @@ public class ProductsResource {
 	private ProductsService productsSvc;
 
 	@GET
+	@Path("/{category}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProducts(@QueryParam("category") String category) {
-		Products products = productsSvc.getProductsByCategory(category);
+	public Response getProducts(@PathParam("category") String category, @QueryParam("priceStart") long priceStart,
+			@QueryParam("priceEnd") long priceEnd, @QueryParam("sortRatings") boolean sortRatings,
+			@QueryParam("sortReviews") boolean sortReviews) {
+		Products products = null;
+		products = productsSvc.getProductsByCategory(category, priceStart, priceEnd);
 		if (products != null) {
-			SortUtil.sortProductsByPopularity(products.getItems());
+			if (sortRatings || sortReviews) {
+				ProductsSortUtil.sortByParams(products.getItems(), sortRatings, sortReviews);
+			} else {
+				ProductsSortUtil.sortByPopularity(products.getItems());
+			}
 			return Response.ok(products).build();
 		} else {
 			ErrorMessage errorMessage = new ErrorMessage(404, "No Products for the category");
