@@ -19,7 +19,7 @@ public class ProductsResource {
 	public Response getProducts(@QueryParam("category") String category) {
 		Products products = productsSvc.getProductsByCategory(category);
 		if (products != null) {
-			SortUtil.sortProductsByPopularity(products);
+			SortUtil.sortProductsByPopularity(products.getItems());
 			return Response.ok(products).build();
 		} else {
 			ErrorMessage errorMessage = new ErrorMessage(404, "No Products for the category");
