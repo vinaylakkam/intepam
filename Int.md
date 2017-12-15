@@ -26,6 +26,7 @@
  * Exception heirachy
  * When do we need to use Runtime Exceptions
  * Purpose of equlas and hashcode
+ * How to you create multiple threads
  
 ## Java8:
  * How Java8 functional programming is different from its earlier versions
@@ -49,6 +50,10 @@
 ## Code review
   * What do you check when you do code review
   * What does 'clean code' mean to you
+  
+## CI
+  * What is CI
+  * What is CD
   
 ## Problem:
 
