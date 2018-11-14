@@ -1,4 +1,3 @@
-Question 2: 
 
 Imagine you have been given role to design a competitor for Flipkart.com for your new company. Thousands of products needs to  be listed on website.
   
